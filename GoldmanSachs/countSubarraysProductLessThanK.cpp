@@ -1,4 +1,43 @@
-// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution{
+  public:
+    int countSubArrayProductLessThanK(const vector<int>& a, int n, long long k) {
+       int i = 0, j = 0;
+       int count = 0;
+       long long p = 1;
+       for(j=0; j<n; j++){
+           p = p * a[j];
+           while(i<j && p>=k){
+               p = p / a[i];
+               i++;
+           }
+           if(p<k){
+               count = count + (j-i+1);
+           }
+       }
+       return count;
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, i;
+        long long int k;
+        cin >> n >> k;
+        vector<int> arr(n);
+        for (i = 0; i < n; i++) cin >> arr[i];
+        Solution obj;
+        cout << obj.countSubArrayProductLessThanK(arr, n, k) << endl;
+    }
+    return 0;
+}
+
+
+/*// { Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -49,3 +88,4 @@ int main() {
     return 0;
 }
   // } Driver Code Ends
+  */
